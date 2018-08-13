@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../plugins/angularjs/angular.min.js"></script>
+    <script type="text/javascript">
+        var app = angular.module("pyg",[]);
+        app.controller("helloController",function ($scope) {
+            $scope.add=function () {
+                return "你好"
+            };
+            $scope.text={a:"666"};
+            $scope.name="你好";
+        })
+    </script>
+</head>
+<body ng-app="pyg" ng-controller="helloController">
+{{add()}}
+{{text.a}}
+{{name}}
+
+
+</body>
+</html>

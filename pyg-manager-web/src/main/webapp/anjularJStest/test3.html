@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../plugins/angularjs/angular.min.js">
+
+    </script>
+    <script type="text/javascript">
+        function fun1($scope) {
+            $scope.text={a:"你好"}
+        }
+        function fun2($scope) {
+            $scope.user={name:"zhangsan",age:18}
+        }
+    </script>
+</head>
+<body ng-app>
+
+<div ng-controller="fun1">
+    {{text.a}}
+</div>
+
+<div ng-controller="fun2">
+    {{user.age}}
+    {{user.name}}
+</div>
+
+</body>
+</html>

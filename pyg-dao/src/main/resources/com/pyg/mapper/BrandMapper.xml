@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pyg.mapper.BrandMapper" >
+
+  <select id="findAll" resultType="tbBrand">
+    select id,name,first_char firstChar from tb_brand
+  </select>
+
+  <insert id="save" parameterType="tbBrand">
+    insert into tb_brand values(null,#{name},#{firstChar})
+  </insert>
+
+  <select id="findById" parameterType="int" resultType="tbBrand">
+    select id,name,first_char firstChar from tb_brand where id =#{id}
+  </select>
+
+  <update id="update" parameterType="tbBrand">
+    update tb_brand set name=#{name},first_char=#{firstChar} where id=#{id}
+  </update>
+
+  <delete id="deleteById" parameterType="long">
+    delete from tb_brand where id=#{id}
+  </delete>
+
+
+</mapper>

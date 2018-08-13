@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../plugins/angularjs/angular.min.js"></script>
+    <script type="text/javascript">
+        var app=angular.module("pyg",[]);
+        app.controller("testController",function ($scope) {
+            $scope.add=function (x,y) {
+                $scope.z=x+y;
+            }
+        })
+    </script>
+</head>
+<body ng-app="pyg" ng-controller="testController">
+<input type="text" ng-model="x">
+<input type="text" ng-model="y">
+<button ng-click="add(x,y)" value="">x+y</button>
+{{z}}
+
+</body>
+</html>

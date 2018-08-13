@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../plugins/angularjs/angular.min.js"></script>
+    <script type="text/javascript">
+        var app = angular.module("pyg",[]);
+        app.controller("testController",function ($scope,$http) {
+            $scope.add=function () {
+                $http.get("data.json").success(function (data) {
+                    $scope.list=data;
+                })
+            }
+        })
+    </script>
+</head>
+<body ng-app="pyg" ng-controller="testController">
+<table ng-init="add()">
+    <tr>
+        <td>名字</td>
+        <td>数学</td>
+        <td>语文</td>
+    </tr>
+    <tr ng-repeat="user in list">
+        <td>{{user.name}}</td>
+        <td>{{user.shuxue}}</td>
+        <td>{{user.yuwen}}</td>
+    </tr>
+</table>
+
+
+</body>
+</html>

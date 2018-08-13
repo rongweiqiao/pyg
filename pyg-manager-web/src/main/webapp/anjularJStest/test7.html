@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../plugins/angularjs/angular.min.js"></script>
+    <script type="text/javascript">
+        var app=angular.module("pyg",[]);
+        app.controller("testController",function ($scope) {
+            $scope.userList=[{name:"张三",age:18},{name:"李四",age:28}]
+        })
+    </script>
+</head>
+<body ng-app="pyg" ng-controller="testController">
+<table>
+    <tr>
+        <td>名字</td>
+        <td>年龄</td>
+    </tr>
+    <tr ng-repeat="user in userList">
+        <td>{{user.name}}</td>
+        <td>{{user.age}}</td>
+    </tr>
+</table>
+
+</body>
+</html>
