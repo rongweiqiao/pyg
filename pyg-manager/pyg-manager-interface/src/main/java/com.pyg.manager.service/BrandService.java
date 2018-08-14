@@ -18,7 +18,7 @@ public interface BrandService {
 
     public void save(TbBrand brand);
 
-    public TbBrand findById(int id);
+    public TbBrand findById(long id);
 
     public void update(TbBrand tbBrand);
 

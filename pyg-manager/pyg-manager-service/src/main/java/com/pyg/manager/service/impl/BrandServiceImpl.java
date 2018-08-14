@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.pyg.manager.service.BrandService;
 import com.pyg.mapper.BrandMapper;
+import com.pyg.mapper.TbBrandMapper;
 import com.pyg.pojo.TbBrand;
 import com.pyg.utils.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,42 +21,39 @@ public class BrandServiceImpl implements BrandService{
 
     //注入mapper接口代理对象
     @Autowired
-    private BrandMapper brandMapper;
+    private TbBrandMapper brandMapper;
 
     /**
      * 需求：查询所有品牌数据
      */
     public List<TbBrand> findAll() {
-        return brandMapper.findAll();
+        return brandMapper.selectByExample(null);
     }
 
     @Override
     public PageResult findAllByPage(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize);
-//        List<TbBrand> brandList = brandMapper.findAll();
-//        PageInfo<TbBrand> pageInfo = new PageInfo<>(brandList);
-//        return new PageResult(pageInfo.getTotal(),pageInfo.getList());
-        Page<TbBrand> pageInfo= (Page<TbBrand>) brandMapper.findAll();
+        Page<TbBrand> pageInfo= (Page<TbBrand>) brandMapper.selectByExample(null);
         return new PageResult(pageInfo.getTotal(),pageInfo.getResult());
     }
 
     @Override
     public void save(TbBrand brand) {
-        brandMapper.save(brand);
+        brandMapper.insertSelective(brand);
     }
 
     @Override
-    public TbBrand findById(int id) {
-        return brandMapper.findById(id);
+    public TbBrand findById(long id) {
+        return brandMapper.selectByPrimaryKey(id);
     }
 
     @Override
     public void update(TbBrand tbBrand) {
-        brandMapper.update(tbBrand);
+        brandMapper.updateByPrimaryKeySelective(tbBrand);
     }
 
     @Override
     public void deleteById(long id) {
-        brandMapper.deleteById(id);
+        brandMapper.deleteByPrimaryKey(id);
     }
 }

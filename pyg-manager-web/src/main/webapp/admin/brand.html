@@ -14,69 +14,10 @@
 	<script src="../plugins/angularjs/angular.min.js"></script>
 	<link rel="stylesheet" href="../plugins/angularjs/pagination.css">
 	<script src="../plugins/angularjs/pagination.js"></script>
-
-	<script type="text/javascript">
-		var app=angular.module("pyg",["pagination"]);
-		app.controller("brandController",function ($scope,$http) {
-            // $scope.findAll=function () {
-				// $http.get("../brand/findAll").success(function (data) {
-				//     $scope.brandList=data;
-            //     })
-            // };
-			$scope.findByPage=function (pageNum,pageSize) {
-				$http.get("../brand/findAllByPage?pageNum="+pageNum+"&pageSize="+pageSize).success(function (data) {
-					$scope.brandList=data.rows;
-					$scope.paginationConf.totalItems=data.total;
-                })
-            };
-            $scope.paginationConf={
-			    currentPage:1,
-				totalItems:10,
-				itemsPerPage:10,
-				perPageOptions:[10,20,30,40,50],
-				onChange:function () {
-			        $scope.findByPage($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);
-                }
-			};
-			$scope.save=function () {
-			    var method="save";
-			    if($scope.brand.id!=null){
-			        method="update";
-				}
-				$http.post("../brand/"+method,$scope.brand).success(function (pygResult) {
-					if(pygResult.success){
-                        $scope.findByPage($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);
-					}else {
-					    alert(pygResult.message);
-					}
-                })
-            };
-			$scope.findById=function (id) {
-				$http.get("../brand/findById?id="+id).success(function (tbBrand) {
-					$scope.brand=tbBrand;
-                })
-            }
-            $scope.ids=[];
-			$scope.updateSelection=function ($event,id) {
-				if($event.target.checked){
-				    $scope.ids.push(id);
-				}else {
-				    $scope.ids.splice($scope.ids.indexOf(id),1);
-				}
-            }
-            $scope.dele=function () {
-				$http.get("../brand/delete?ids="+$scope.ids).success(function (pygResult) {
-					if(pygResult.success){
-					    $scope.ids=[];
-                        $scope.findByPage($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);
-					}else {
-					    alert(pygResult.message);
-					}
-                })
-            }
-
-        })
-	</script>
+	<script src="../js/base_pagination.js"></script>
+	<script src="../js/service/brandService.js"></script>
+	<script src="../js/controller/baseController.js"></script>
+	<script src="../js/controller/brandController.js"></script>
 
     
 </head>
@@ -128,7 +69,7 @@
 			                          </tr>
 			                      </thead>
 			                      <tbody>
-			                          <tr ng-repeat="brand in brandList">
+			                          <tr ng-repeat="brand in list">
 			                              <td><input  type="checkbox" ng-click="updateSelection($event,brand.id)"></td>
 				                          <td>{{brand.id}}</td>
 									      <td>{{brand.name}}</td>

@@ -14,11 +14,23 @@ public interface BrandMapper {
      */
     public List<TbBrand> findAll();
 
-    public int save(TbBrand brand);
+    /**
+     * 需求：实现品牌数据添加
+     */
+    public void insert(TbBrand brand);
 
-    public TbBrand findById(int id);
+    /**
+     * 需求：根据id查询品牌数据
+     */
+    public TbBrand findById(Long id);
 
-    public int update(TbBrand tbBrand);
+    /**
+     * 需求：更新品牌数据
+     */
+    public void update(TbBrand brand);
 
-    public int deleteById(long id);
+    /**
+     * 需求：删除品牌数据
+     */
+    public void delete(Long id);
 }
