@@ -14,4 +14,7 @@ app.service("specificationService",function ($http) {
     this.update=function (brand) {
         return $http.post("../specification/update",brand);
     }
+    this.findSpecificationList=function () {
+        return $http.get("../specification/findSpecificationList");
+    }
 });

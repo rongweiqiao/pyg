@@ -16,6 +16,7 @@ import com.pyg.vo.Specification;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by on 2018/8/10.
@@ -90,4 +91,11 @@ public class SpecificationImpl implements SpecificationService{
         specificationOptionMapper.deleteByExample(tbSpecificationOptionExample);
         specificationMapper.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public List<Map> findSpecificationList() {
+        return specificationMapper.findSpecificationList();
+    }
+
+
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by on 2018/8/10.
@@ -79,5 +80,9 @@ public class SpecificationController {
             e.printStackTrace();
             return new PygResult(false, "删除失败");
         }
+    }
+    @RequestMapping("findSpecificationList")
+    public List<Map> findSpecificationList(){
+        return specificationService.findSpecificationList();
     }
 }

@@ -4,6 +4,7 @@ import com.pyg.pojo.TbBrand;
 import com.pyg.utils.PageResult;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by on 2018/8/10.
@@ -23,4 +24,6 @@ public interface BrandService {
     public void update(TbBrand tbBrand);
 
     public void deleteById(long id);
+
+    public List<Map> findBrandList();
 }

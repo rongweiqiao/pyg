@@ -5,6 +5,7 @@ import com.pyg.utils.PageResult;
 import com.pyg.vo.Specification;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by on 2018/8/10.
@@ -24,4 +25,6 @@ public interface SpecificationService {
     public void update(Specification specification);
 
     public void deleteById(long id);
+
+    public List<Map> findSpecificationList();
 }

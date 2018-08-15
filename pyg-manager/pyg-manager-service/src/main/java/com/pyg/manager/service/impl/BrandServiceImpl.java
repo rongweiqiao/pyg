@@ -12,6 +12,7 @@ import com.pyg.utils.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by on 2018/8/10.
@@ -55,5 +56,10 @@ public class BrandServiceImpl implements BrandService{
     @Override
     public void deleteById(long id) {
         brandMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Map> findBrandList() {
+        return brandMapper.findBrandList();
     }
 }

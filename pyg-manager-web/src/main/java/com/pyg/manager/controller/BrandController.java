@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by on 2018/8/10.
@@ -76,5 +77,10 @@ public class BrandController {
             e.printStackTrace();
             return new PygResult(false, "删除失败");
         }
+    }
+
+    @RequestMapping("findBrandList")
+    public List<Map> findBrandList(){
+       return brandService.findBrandList();
     }
 }

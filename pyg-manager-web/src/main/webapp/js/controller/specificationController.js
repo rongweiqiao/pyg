@@ -39,7 +39,7 @@ app.controller("specificationController",function ($scope,$controller,specificat
     };
     $scope.addTableRow=function () {
         $scope.entity.tbSpecificationOptionList.push({})
-    }
+    };
     $scope.deleTableRow=function (index) {
         $scope.entity.tbSpecificationOptionList.splice(index,1);
     }

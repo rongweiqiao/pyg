@@ -14,4 +14,7 @@ app.service("brandService",function ($http) {
     this.update=function (brand) {
         return $http.post("../brand/update",brand);
     }
+    this.findBrandList=function () {
+        return $http.get("../brand/findBrandList");
+    }
 });
