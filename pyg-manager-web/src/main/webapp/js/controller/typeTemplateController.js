@@ -2,7 +2,8 @@
 app.controller('typeTemplateController' ,function($scope,$controller,typeTemplateService,brandService,specificationService){
 	
 	$controller('baseController',{$scope:$scope});//继承
-	
+
+    $scope.searchEntity={};//定义搜索对象
     //读取列表数据绑定到表单中  
 	$scope.findAll=function(){
 		typeTemplateService.findAll().success(
@@ -10,17 +11,17 @@ app.controller('typeTemplateController' ,function($scope,$controller,typeTemplat
 				$scope.list=response;
 			}			
 		);
-	}    
+	};
 	
 	//分页
-	$scope.findByPage=function(page,rows){
-		typeTemplateService.findPage(page,rows).success(
-			function(response){
-				$scope.list=response.rows;	
-				$scope.paginationConf.totalItems=response.total;//更新总记录数
-			}			
-		);
-	}
+	// $scope.findByPage=function(page,rows){
+	// 	typeTemplateService.findPage(page,rows).success(
+	// 		function(response){
+	// 			$scope.list=response.rows;
+	// 			$scope.paginationConf.totalItems=response.total;//更新总记录数
+	// 		}
+	// 	);
+	// }
 	
 	//查询实体 
 	$scope.findOne=function(id){				
@@ -45,7 +46,8 @@ app.controller('typeTemplateController' ,function($scope,$controller,typeTemplat
 		serviceObject.success(
 			function(response){
 				if(response.success){
-					//重新查询 
+					//重新查询
+                    $scope.searchEntity={};
 		        	$scope.findByPage($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);//重新加载
 				}else{
 					alert(response.message);
@@ -67,11 +69,10 @@ app.controller('typeTemplateController' ,function($scope,$controller,typeTemplat
 			}		
 		);				
 	};
-	
-	$scope.searchEntity={};//定义搜索对象 
+
 	
 	//搜索
-	$scope.search=function(page,rows){			
+	$scope.findByPage=function(page,rows){
 		typeTemplateService.search(page,rows,$scope.searchEntity).success(
 			function(response){
 				$scope.list=response.rows;	

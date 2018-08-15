@@ -17,4 +17,7 @@ app.service("specificationService",function ($http) {
     this.findSpecificationList=function () {
         return $http.get("../specification/findSpecificationList");
     }
+    this.search=function (pageNum,pageSize,searchEntity) {
+        return $http.post("../specification/search?pageNum="+pageNum+"&pageSize="+pageSize,searchEntity);
+    }
 });

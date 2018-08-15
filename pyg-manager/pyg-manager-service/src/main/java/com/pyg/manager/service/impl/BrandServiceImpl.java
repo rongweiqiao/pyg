@@ -8,6 +8,7 @@ import com.pyg.manager.service.BrandService;
 import com.pyg.mapper.BrandMapper;
 import com.pyg.mapper.TbBrandMapper;
 import com.pyg.pojo.TbBrand;
+import com.pyg.pojo.TbBrandExample;
 import com.pyg.utils.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -61,5 +62,21 @@ public class BrandServiceImpl implements BrandService{
     @Override
     public List<Map> findBrandList() {
         return brandMapper.findBrandList();
+    }
+
+    @Override
+    public PageResult findAllByPage(TbBrand tbBrand, int pageNum, int pageSize) {
+        TbBrandExample tbBrandExample = new TbBrandExample();
+        TbBrandExample.Criteria criteria = tbBrandExample.createCriteria();
+        if(tbBrand!=null){
+            if(tbBrand.getFirstChar()!=null&&tbBrand.getFirstChar().length()>0){
+                criteria.andFirstCharLike("%"+tbBrand.getFirstChar()+"%");
+            }if(tbBrand.getName()!=null&&tbBrand.getName().length()>0){
+                criteria.andNameLike("%"+tbBrand.getName()+"%");
+            }
+        }
+        PageHelper.startPage(pageNum,pageSize);
+        Page<TbBrand> pageInfo= (Page<TbBrand>) brandMapper.selectByExample(tbBrandExample);
+        return new PageResult(pageInfo.getTotal(),pageInfo.getResult());
     }
 }

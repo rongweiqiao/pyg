@@ -30,9 +30,9 @@
                     <div class="box-body">
 						<div class="box-tools pull-right">
 							<div class="has-feedback">
-								品牌名称：<input  >
-								首字母： <input  >
-								<button class="btn btn-default" >查询</button>
+								品牌名称：<input ng-model="searchEntity.name" >
+								首字母： <input  ng-model="searchEntity.firstChar">
+								<button class="btn btn-default"ng-click="findByPage(paginationConf.currentPage,paginationConf.itemsPerPage)">查询</button>
 							</div>
 						</div>
                         <!-- 数据表格 -->

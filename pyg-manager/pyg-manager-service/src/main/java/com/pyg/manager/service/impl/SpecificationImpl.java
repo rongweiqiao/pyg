@@ -97,5 +97,19 @@ public class SpecificationImpl implements SpecificationService{
         return specificationMapper.findSpecificationList();
     }
 
+    @Override
+    public PageResult findAllByPage(TbSpecification tbSpecification, int pageNum, int pageSize) {
+        TbSpecificationExample example = new TbSpecificationExample();
+        TbSpecificationExample.Criteria criteria = example.createCriteria();
+        if(tbSpecification!=null){
+            if(tbSpecification.getSpecName()!=null&&tbSpecification.getSpecName().length()>0){
+                criteria.andSpecNameLike("%"+tbSpecification.getSpecName()+"%");
+            }
+        }
+        PageHelper.startPage(pageNum,pageSize);
+       Page<TbSpecification> pageInfo= (Page<TbSpecification>) specificationMapper.selectByExample(example);
+       return new PageResult(pageInfo.getTotal(),pageInfo.getResult());
+    }
+
 
 }

@@ -26,4 +26,6 @@ public interface BrandService {
     public void deleteById(long id);
 
     public List<Map> findBrandList();
+
+    public PageResult findAllByPage(TbBrand tbBrand, int pageNum, int pageSize);
 }

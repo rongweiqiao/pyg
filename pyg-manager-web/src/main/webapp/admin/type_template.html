@@ -56,8 +56,8 @@
                             </div>
                             <div class="box-tools pull-right">
                                 <div class="has-feedback">
-							                  分类模板名称：<input ng-model="">
-									<button class="btn btn-default">查询</button>                                    
+							                  分类模板名称：<input ng-model="searchEntity.name">
+									<button class="btn btn-default" ng-click="findByPage(paginationConf.currentPage,paginationConf.itemsPerPage)">查询</button>
                                 </div>
                             </div>
                             <!--工具栏/-->

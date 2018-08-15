@@ -1,7 +1,8 @@
 app.controller("specificationController",function ($scope,$controller,specificationService) {
     $controller("baseController",{$scope:$scope});
+    $scope.searchEntity={};
     $scope.findByPage=function (pageNum,pageSize) {
-        specificationService.findByPage(pageNum,pageSize).success(function (data) {
+        specificationService.search(pageNum,pageSize,$scope.searchEntity).success(function (data) {
             $scope.list=data.rows;
             $scope.paginationConf.totalItems=data.total;
         })
@@ -15,6 +16,7 @@ app.controller("specificationController",function ($scope,$controller,specificat
         }
         objMethod.success(function (pygResult) {
             if(pygResult.success){
+                $scope.searchEntity={};
                 $scope.findByPage($scope.paginationConf.currentPage,$scope.paginationConf.itemsPerPage);
             }else {
                 alert(pygResult.message);

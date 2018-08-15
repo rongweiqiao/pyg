@@ -27,4 +27,6 @@ public interface SpecificationService {
     public void deleteById(long id);
 
     public List<Map> findSpecificationList();
+
+    PageResult findAllByPage(TbSpecification tbSpecification, int pageNum, int pageSize);
 }

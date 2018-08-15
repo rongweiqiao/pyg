@@ -85,4 +85,10 @@ public class SpecificationController {
     public List<Map> findSpecificationList(){
         return specificationService.findSpecificationList();
     }
+
+    @RequestMapping("search")
+    public PageResult search(@RequestBody TbSpecification tbSpecification, int pageNum, int pageSize) {
+        PageResult pageResult = specificationService.findAllByPage(tbSpecification, pageNum, pageSize);
+        return pageResult;
+    }
 }

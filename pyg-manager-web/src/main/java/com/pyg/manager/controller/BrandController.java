@@ -83,4 +83,9 @@ public class BrandController {
     public List<Map> findBrandList(){
        return brandService.findBrandList();
     }
+
+    @RequestMapping("search")
+    public PageResult search(@RequestBody TbBrand tbBrand,int pageNum, int pageSize){
+        return brandService.findAllByPage(tbBrand,pageNum,pageSize);
+    }
 }
