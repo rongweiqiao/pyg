@@ -15,4 +15,6 @@
 	<!-- 把对象注册到zookeeper注册中心 : dubbox -->
 	<dubbo:annotation package="com.pyg.manager.service.impl" />
 
+	<bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+
 </beans>

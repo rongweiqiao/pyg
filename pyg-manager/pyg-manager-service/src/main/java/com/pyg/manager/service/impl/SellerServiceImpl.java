@@ -9,6 +9,7 @@ import com.pyg.pojo.TbSeller;
 import com.pyg.pojo.TbSellerExample;
 import com.pyg.utils.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 
@@ -22,6 +23,9 @@ public class SellerServiceImpl implements SellerService {
 
 	@Autowired
 	private TbSellerMapper sellerMapper;
+
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	/**
 	 * 查询全部
@@ -46,7 +50,9 @@ public class SellerServiceImpl implements SellerService {
 	 */
 	@Override
 	public void add(TbSeller seller) {
-		sellerMapper.insert(seller);		
+		String newPsd = bCryptPasswordEncoder.encode(seller.getPassword());
+		seller.setPassword(newPsd);
+		sellerMapper.insert(seller);
 	}
 
 	
@@ -159,5 +165,12 @@ public class SellerServiceImpl implements SellerService {
 		Page<TbSeller> page= (Page<TbSeller>)sellerMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
 	}
-	
+
+	@Override
+	public void updateStatus(String status, String sellerId) {
+		TbSeller seller = sellerMapper.selectByPrimaryKey(sellerId);
+		seller.setStatus(status);
+		sellerMapper.updateByPrimaryKey(seller);
+	}
+
 }
