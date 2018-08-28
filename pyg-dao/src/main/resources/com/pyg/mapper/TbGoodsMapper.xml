@@ -96,17 +96,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="com.pyg.pojo.TbGoodsKey" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from tb_goods
     where id = #{id,jdbcType=BIGINT}
-      and small_pic = #{smallPic,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.pyg.pojo.TbGoodsKey">
+  <delete id="deleteByPrimaryKey" parameterType="long">
     delete from tb_goods
     where id = #{id,jdbcType=BIGINT}
-      and small_pic = #{smallPic,jdbcType=VARCHAR}
   </delete>
   <delete id="deleteByExample" parameterType="com.pyg.pojo.TbGoodsExample">
     delete from tb_goods
@@ -114,7 +112,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.pyg.pojo.TbGoods">
+  <insert id="insert" parameterType="com.pyg.pojo.TbGoods" useGeneratedKeys="true" keyProperty="id">
     insert into tb_goods (id, small_pic, seller_id, 
       goods_name, default_item_id, audit_status, 
       is_marketable, brand_id, caption, 
@@ -128,7 +126,7 @@
       #{price,jdbcType=DECIMAL}, #{typeTemplateId,jdbcType=BIGINT}, #{isEnableSpec,jdbcType=VARCHAR}, 
       #{isDelete,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.pyg.pojo.TbGoods">
+  <insert id="insertSelective" parameterType="com.pyg.pojo.TbGoods" useGeneratedKeys="true" keyProperty="id">
     insert into tb_goods
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -362,7 +360,6 @@
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
-      and small_pic = #{smallPic,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.pyg.pojo.TbGoods">
     update tb_goods
@@ -381,6 +378,5 @@
       is_enable_spec = #{isEnableSpec,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
-      and small_pic = #{smallPic,jdbcType=VARCHAR}
   </update>
 </mapper>

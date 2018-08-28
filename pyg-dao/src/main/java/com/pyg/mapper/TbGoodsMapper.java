@@ -11,7 +11,7 @@ public interface TbGoodsMapper {
 
     int deleteByExample(TbGoodsExample example);
 
-    int deleteByPrimaryKey(TbGoodsKey key);
+    int deleteByPrimaryKey(long key);
 
     int insert(TbGoods record);
 
@@ -19,7 +19,7 @@ public interface TbGoodsMapper {
 
     List<TbGoods> selectByExample(TbGoodsExample example);
 
-    TbGoods selectByPrimaryKey(TbGoodsKey key);
+    TbGoods selectByPrimaryKey(long key);
 
     int updateByExampleSelective(@Param("record") TbGoods record, @Param("example") TbGoodsExample example);
 

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jms="http://www.springframework.org/schema/jms"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms.xsd">
+
+    <bean id="activeMQSslConnectionFactory" class="org.apache.activemq.ActiveMQSslConnectionFactory">
+        <constructor-arg value="tcp://192.168.12.168:61616"></constructor-arg>
+    </bean>
+
+    <bean id="singleConnectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+        <property name="targetConnectionFactory" ref="activeMQSslConnectionFactory"></property>
+    </bean>
+
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="singleConnectionFactory"></property>
+    </bean>
+
+    <bean id="activeMQTopic" class="org.apache.activemq.command.ActiveMQTopic">
+        <constructor-arg value="solr_html_topic"></constructor-arg>
+    </bean>
+
+    <bean id="activeMQQueue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg value="solr_dele_item"></constructor-arg>
+    </bean>
+
+    <bean id="myMessageListener"  class="com.pyg.search.listen.MyMessageListener"></bean>
+    <bean id="topicContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="singleConnectionFactory"></property>
+        <property name="destination" ref="activeMQTopic"></property>
+        <property name="messageListener" ref="myMessageListener"></property>
+    </bean>
+    <bean id="myDeleListener" class="com.pyg.search.listen.MyDeleListener"></bean>
+    <bean id="queneContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="singleConnectionFactory"></property>
+        <property name="destination" ref="activeMQQueue"></property>
+        <property name="messageListener" ref="myDeleListener"></property>
+    </bean>
+
+
+
+</beans>

@@ -1,11 +1,15 @@
 package com.pyg.manager.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.pyg.manager.service.TypeTemplateService;
 import com.pyg.mapper.TbBrandMapper;
+import com.pyg.mapper.TbSpecificationOptionMapper;
 import com.pyg.mapper.TbTypeTemplateMapper;
+import com.pyg.pojo.TbSpecificationOption;
+import com.pyg.pojo.TbSpecificationOptionExample;
 import com.pyg.pojo.TbTypeTemplate;
 import com.pyg.pojo.TbTypeTemplateExample;
 import com.pyg.utils.PageResult;
@@ -24,6 +28,9 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 
 	@Autowired
 	private TbTypeTemplateMapper typeTemplateMapper;
+
+	@Autowired
+	private TbSpecificationOptionMapper specificationOptionMapper;
 	/**
 	 * 查询全部
 	 */
@@ -105,6 +112,22 @@ public class TypeTemplateServiceImpl implements TypeTemplateService {
 		
 		Page<TbTypeTemplate> page= (Page<TbTypeTemplate>)typeTemplateMapper.selectByExample(example);		
 		return new PageResult(page.getTotal(), page.getResult());
+	}
+
+	@Override
+	public List<Map> findSpecList(long id) {
+		TbTypeTemplate tbTypeTemplate = typeTemplateMapper.selectByPrimaryKey(id);
+		List<Map> list = JSON.parseArray(tbTypeTemplate.getSpecIds(), Map.class);
+		for (Map map : list) {
+			Integer specId =(Integer) map.get("id");
+			TbSpecificationOptionExample example = new TbSpecificationOptionExample();
+			TbSpecificationOptionExample.Criteria criteria = example.createCriteria();
+			criteria.andSpecIdEqualTo(Long.valueOf(specId));
+			List<TbSpecificationOption> specificationOptions = specificationOptionMapper.selectByExample(example);
+			map.put("options",specificationOptions);
+
+		}
+		return list;
 	}
 
 
