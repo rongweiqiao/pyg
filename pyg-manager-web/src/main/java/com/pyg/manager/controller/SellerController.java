@@ -38,6 +38,7 @@ public class SellerController {
 	 */
 	@RequestMapping("/findPage")
 	public PageResult findPage(int page, int rows){
+
 		return sellerService.findPage(page, rows);
 	}
 	
@@ -110,5 +111,15 @@ public class SellerController {
 	public PageResult search(@RequestBody TbSeller seller, int page, int rows  ){
 		return sellerService.findPage(seller, page, rows);		
 	}
-	
+
+	@RequestMapping("/updateStatus")
+	public PygResult updateStatus(String status,String sellerId){
+		try {
+			sellerService.updateStatus(status,sellerId);
+			return new PygResult(true,"修改成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new PygResult(false,"修改失败");
+		}
+	}
 }
