@@ -22,7 +22,7 @@
            
            <#list itemList as item>
             {
-              id:'${item.id}',
+              id:'${item.id?c}',
               title:'${item.title}',
               price:${item.price},
               status:'${item.status}',

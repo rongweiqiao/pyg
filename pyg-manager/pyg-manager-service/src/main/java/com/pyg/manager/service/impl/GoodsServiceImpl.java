@@ -111,13 +111,14 @@ public class GoodsServiceImpl implements GoodsService {
 
         //设置商家名称
         TbSeller tbSeller = sellerMapper.selectByPrimaryKey(tbGoods.getSellerId());
-        item.setSellerId(tbSeller.getNickName());
+        item.setSeller(tbSeller.getNickName());
 
         //图片地址
         List<Map> imagelist = JSON.parseArray(tbGoodsDesc.getItemImages(), Map.class);
         if (imagelist.size() > 0) {
             item.setImage((String) imagelist.get(0).get("url"));
         }
+
 
     }
 
